@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Aguilera-Ruiz</title>
+    <meta charset="UTF-8">
+		<link rel="stylesheet" href="/css/style.css">
+		<link rel="manifest" href="/manifest.json">
+</head>
+<body>
+		<div id="app-container">
+			<h2>Configuración del Dispositivo</h2>
+			<div id="status-box">
+				<div class="user-item">
+					<span>Device</span>
+					<div id="device-name" class="status">-</div>
+				</div>
+				<div class="status-item">
+					<span>Notificaciones</span>
+					<div id="notification-status" class="status">Desactivadas</div>
+				</div>
+				<div class="status-item">
+					<span>Token</span>
+					<div id="token-status" class="status">No registrado</div>
+					<code id="token-display">Esperando token...</code>
+				</div>
+			</div>
+
+			<button id="btn-permisos" onclick="getToken()">
+				<span id="btn-text">Registrar dispositivo</span>
+				<div class="spinner"></div>
+			</button>
+		</div>
+
+		<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-messaging-compat.js"></script>
+		<script src="/js/firebase-config.js"></script>
+		<script >
+			if ('serviceWorker' in navigator) {
+		window.addEventListener('load', () => {
+				navigator.serviceWorker.register('/firebase-messaging-sw.js')
+						.then(reg => console.log('SW registrado con éxito', reg))
+						.catch(err => console.log('Error al registrar SW', err));
+		});
+}
+		</script>
+    <script src="/js/device.js"></script>
+</body>
+</html>

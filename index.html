@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<title>Aguilera-Ruiz</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="/src/css/style.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="manifest" href="/manifest.json">
+	</head>
+	<body>
+		<div id="app-container" >
+			<div id="simple" onclick="toggleVisibility()">
+				<span id="text-simple"></span>
+				<span id="icon-simple"></span>
+			</div>
+			<div id="debug" class="hidden" onclick="toggleVisibility()">
+				<h2>Configuración del Dispositivo</h2>
+				<div id="status-box">
+					<div class="user-item">
+						<span>Device</span>
+						<div id="device-name" class="status">-</div>
+					</div>
+					<div class="status-item">
+						<span>Notificaciones</span>
+						<div id="notification-status" class="status">Desactivadas</div>
+					</div>
+					<div class="status-item">
+						<span>Token</span>
+						<div id="token-status" class="status">No registrado</div>
+						<code id="token-display">Esperando token...</code>
+					</div>
+				</div>
+
+				<button id="btn-permisos" onclick="getToken()">
+					<span id="btn-text">Registrar dispositivo</span>
+					<div class="spinner"></div>
+				</button>
+			</div>
+		</div>
+
+		<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-messaging-compat.js"></script>
+		<script type="module" src="/src/js/firebase-config.js"></script>
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>
