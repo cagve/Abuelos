@@ -40,7 +40,7 @@ jobs:
           node-version: lts/*
           cache: 'npm'
       - name: Instalar dependencias
-        run: npm ci
+        run: npm install
       - name: Construir
         run: npm run build
       - name: Configurar Pages
