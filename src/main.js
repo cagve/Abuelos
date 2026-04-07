@@ -9,8 +9,10 @@ window.toggleVisibility = function() {
     debug.classList.toggle('hidden');
 };
 
+let swRegistration;
+
 if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
+    window.addEventListener('load', async () => {
         const config = {
             apiKey: import.meta.env.VITE_FIREBASE_apiKey,
             messagingSenderId: import.meta.env.VITE_FIREBASE_messagingSenderId,
@@ -19,11 +21,12 @@ if ('serviceWorker' in navigator) {
         };
 
         const configParam = encodeURIComponent(JSON.stringify(config));
-        navigator.serviceWorker.register(`/Abuelos/firebase-messaging-sw.js?config=${configParam}`, {scope: '/Abuelos/'})
-            .then(reg => console.log('SW registrado con éxito'))
-            .catch(err => console.error('Error al registrar SW', err));
+        swRegistration = await navigator.serviceWorker.register(
+            `/firebase-messaging-sw.js?config=${configParam}`
+        );
     });
 }
+
 
 
 async function getToken() {
@@ -48,7 +51,8 @@ async function getToken() {
 		if (permission === 'granted') {
 			notificationStatus.innerText = "Activadas"
 			const token = await messaging.getToken({ 
-				vapidKey: VAPID_KEY
+				vapidKey: VAPID_KEY,
+				serviceWorkerRegistration: swRegistration
 			});
 
 			if (token) {
