@@ -62,7 +62,7 @@ async function getToken() {
 
 				textSimple.innerHTML = '<h2 style="color:green;"> App corriendo! </h2>'
 				iconSimple.innerHTML = '<img src="/img/icon-192.png"></img>'
-				const response = await fetch(`http://${SERVER_IP}/register-token`, {
+				const response = await fetch(`${SERVER_IP}/register-token`, {
 					method: 'POST',
 					mode: 'cors',
 					headers: { 'Content-Type': 'application/json' },
