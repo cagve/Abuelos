@@ -3,8 +3,7 @@ import mkcert from 'vite-plugin-mkcert'
 
 export default defineConfig(({ command }) => {
   return {
-    base: command === 'build' ? '/Abuelos/' : '/',
-
+    base: '/',
     plugins: [
       // Solo activamos mkcert en desarrollo
       command === 'serve' ? mkcert({ hosts: ['192.168.1.133', 'localhost'] }) : []
