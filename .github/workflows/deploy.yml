@@ -44,11 +44,11 @@ jobs:
       - name: Construir
         run: npm run build
         env:
-          VITE_FIREBASE_apiKey: ${{ secrets.VITE_FIREBASE_apiKey }}
-          VITE_FIREBASE_messagingSenderId: ${{ secrets.VITE_FIREBASE_messagingSenderId }}
-          VITE_FIREBASE_appId: ${{ secrets.VITE_FIREBASE_appId }}
-          VITE_FIREBASE_projectId: ${{ secrets.VITE_FIREBASE_projectId }}
-          VITE_FIREBASE_vapidKey: ${{ secrets.VITE_FIREBASE_vapidKey }}
+          VITE_FIREBASE_apiKey: ${{ secrets.VITE_FIREBASE_APIKEY }}
+          VITE_FIREBASE_messagingSenderId: ${{ secrets.VITE_FIREBASE_MESSAGINGSENDERID }}
+          VITE_FIREBASE_appId: ${{ secrets.VITE_FIREBASE_APPID }}
+          VITE_FIREBASE_projectId: ${{ secrets.VITE_FIREBASE_PROJECTID }}
+          VITE_FIREBASE_vapidKey: ${{ secrets.VITE_FIREBASE_VAPIDKEY }}
       - name: Configurar Pages
         uses: actions/configure-pages@v6
       - name: Subir artefacto
