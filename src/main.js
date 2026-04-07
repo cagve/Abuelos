@@ -19,13 +19,9 @@ if ('serviceWorker' in navigator) {
         };
 
         const configParam = encodeURIComponent(JSON.stringify(config));
-        // navigator.serviceWorker.register(`/Abuelos/firebase-messaging-sw.js?config=${configParam}`, {scope: '/Abuelos/'})
-        //     .then(reg => console.log('SW registrado con éxito'))
-        //     .catch(err => console.error('Error al registrar SW', err));
-				const reg = await navigator.serviceWorker.register(
-					'/Abuelos/firebase-messaging-sw.js?config=' + configParam, 
-					{ scope: '/Abuelos/' }
-				);
+        navigator.serviceWorker.register(`/Abuelos/firebase-messaging-sw.js?config=${configParam}`, {scope: '/Abuelos/'})
+            .then(reg => console.log('SW registrado con éxito'))
+            .catch(err => console.error('Error al registrar SW', err));
     });
 }
 
@@ -51,13 +47,9 @@ async function getToken() {
 		const permission = await Notification.requestPermission();
 		if (permission === 'granted') {
 			notificationStatus.innerText = "Activadas"
-			const token = await getToken(messaging, { 
-				vapidKey: VAPID_KEY,
-				serviceWorkerRegistration: reg // <--- Aquí le entregas el trabajador que acabas de registrar
+			const token = await messaging.getToken({ 
+				vapidKey: VAPID_KEY
 			});
-			// const token = await messaging.getToken({ 
-			// 	vapidKey: VAPID_KEY
-			// });
 
 			if (token) {
 				tokenDisplay.innerText = token;
