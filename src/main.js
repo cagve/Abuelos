@@ -1,6 +1,6 @@
 import { VAPID_KEY } from "./js/firebase-config";
 import { messaging } from './js/firebase-config';
-const SERVER_IP = '127.0.0.1'; // 
+const SERVER_IP = 'https://abuelos.onrender.com'; // 
 
 window.toggleVisibility = function() {
     const simple = document.getElementById('simple');
@@ -58,7 +58,7 @@ async function getToken() {
 
 				textSimple.innerHTML = '<h2 style="color:green;"> App corriendo! </h2>'
 				iconSimple.innerHTML = '<img src="/img/icon-192.png"></img>'
-				const response = await fetch(`http://${SERVER_IP}:3000/register-token`, {
+				const response = await fetch(`http://${SERVER_IP}/register-token`, {
 					method: 'POST',
 					mode: 'cors',
 					headers: { 'Content-Type': 'application/json' },
