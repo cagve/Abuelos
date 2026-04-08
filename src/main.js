@@ -67,7 +67,7 @@ async function getToken() {
 					mode: 'cors',
 					headers: { 'Content-Type': 'application/json' },
 					body: JSON.stringify({
-						name: deviceName,
+						name: device,
 						token: token 
 					})
 				});
