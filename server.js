@@ -33,6 +33,9 @@ const sendNotification = async (user, title, body) => {
                 requireInteraction: true
             }
         },
+				android: {
+					priority: 'high',
+				},
         token: user.token
     };
 
