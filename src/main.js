@@ -1,5 +1,6 @@
 import { VAPID_KEY } from "./js/firebase-config";
 import { messaging } from './js/firebase-config';
+import { getMessaging, onMessage } from "firebase/messaging";
 const SERVER_IP = 'https://abuelos.onrender.com'; // 
 
 window.toggleVisibility = function() {
@@ -26,8 +27,6 @@ if ('serviceWorker' in navigator) {
         );
     });
 }
-
-
 
 async function getToken() {
 	const btn = document.getElementById('btn-permisos');
@@ -96,5 +95,22 @@ async function getToken() {
 		}
 	}
 }
+
+
+const messaging = getMessaging();
+onMessage(messaging, (payload) => {
+  console.log('Mensaje recibido en primer plano:', payload);
+  
+  const { title, body } = payload.notification;
+
+  const notificationOptions = {
+    body: body,
+    icon: '/favicon.ico', // o tu logo
+  };
+
+  if (Notification.permission === 'granted') {
+    new Notification(title, notificationOptions);
+  }
+});
 
 getToken()
