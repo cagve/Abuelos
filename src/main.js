@@ -1,6 +1,6 @@
 import { VAPID_KEY } from "./js/firebase-config";
 import { messaging } from './js/firebase-config';
-const SERVER_IP = 'https://abuelos.onrender.com'; // 
+const SERVER_IP = import.meta.env.VITE_LOCAL_SERVER_URL || 'https://abuelos.onrender.com';
 
 window.toggleVisibility = function() {
     const simple = document.getElementById('simple');
