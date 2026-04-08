@@ -14,35 +14,27 @@ admin.initializeApp({
 
 const sendNotification = async (user, title, body) => {
 	const message = {
-		notification: {
-			title: title,
-			body: body
-		},
-		webpush: {
-			headers: {
-				Urgency: 'high' // Prioridad máxima para despertar el móvil
-			},
-			notification: {
-				icon: url + '/img/grandparent.jpg',
-				image: url + '/img/grandparent.jpg',
-				badge: url + '/img/badge-silueta.png',
-				vibrate: [500, 100, 500],
-				tag: 'alerta-abuelo',
-				renotify: true,
-				requireInteraction: true
-			}
-		},
-		android: {
-			priority: 'high',
-			notification: {
-				channel_id: 'alertas_urgentes', // ID del canal
-				sound: 'default',
-				default_vibrate_timings: true,
-				priority: 'high'
-			}
-		},
-		token: user.token
-	};
+        data: {
+            title: title,
+            body: body,
+            icon: url + '/img/grandparent.jpg'
+        },
+        webpush: {
+            headers: { Urgency: 'high' },
+            notification: {
+                title: title, 
+                body: body,
+                icon: url + '/img/grandparent.jpg',
+                image: url + '/img/grandparent.jpg',
+                badge: url + '/img/badge-silueta.png',
+                vibrate: [500, 100, 500],
+                tag: 'alerta-abuelo',
+                renotify: true,
+                requireInteraction: true
+            }
+        },
+        token: user.token
+    };
 
 	try {
 		const response = await admin.messaging().send(message);

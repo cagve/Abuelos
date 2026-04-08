@@ -10,10 +10,8 @@ if (configString) {
 
         firebase.initializeApp(firebaseConfig);
         const messaging = firebase.messaging();
-
         messaging.onBackgroundMessage((payload) => {
             console.log('[sw.js] Mensaje recibido:', payload);
-            // 
             // const notificationTitle = payload.notification.title || "Nueva notificación";
             // const notificationOptions = {
             //     body: payload.notification.body,
