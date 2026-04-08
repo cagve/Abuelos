@@ -54,7 +54,7 @@ const sendNotification = async (user, title, body) => {
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static('./public/'))
+app.use(express.static('./'))
 
 let users = [];
 let storedUser = null
@@ -88,12 +88,9 @@ app.get('/api/all-tokens', (req, res) => {
 	res.json(users);
 });
 
-app.get('/info', (req, res) => {
-	res.sendFile(path.join(__dirname, 'public', 'device.html'));
-});
 
 app.get('/info', (req, res) => {
-	res.sendFile(path.join(__dirname, 'public', 'info.html'));
+	res.sendFile(path.join(__dirname, 'info.html'));
 });
 
 
