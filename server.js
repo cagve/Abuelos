@@ -47,6 +47,7 @@ const sendNotification = async (user, title, body) => {
 	try {
 		const response = await admin.messaging().send(message);
 		console.log('Notificación enviada con éxito:', response);
+		console.log(storedUser)
 	} catch (error) {
 		console.log('Error enviando notificación:', error);
 	}
