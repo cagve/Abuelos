@@ -1,16 +1,36 @@
-// public/firebase-messaging-sw.js
 importScripts('https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js');
 importScripts('https://www.gstatic.com/firebasejs/10.7.1/firebase-messaging-compat.js');
 
+// 1. Extraemos el parámetro 'config' de la URL
 const urlParams = new URLSearchParams(location.search);
 const configString = urlParams.get('config');
 
 if (configString) {
-	const firebaseConfig = JSON.parse(decodeURIComponent(configString));
-	firebase.initializeApp(firebaseConfig);
-	const messaging = firebase.messaging();
+    try {
+        // 2. Parseamos el JSON que enviaste desde el frontend
+        const firebaseConfig = JSON.parse(decodeURIComponent(configString));
 
-	console.log("SW: Firebase inicializado dinámicamente");
+        // 3. Inicializamos Firebase
+        firebase.initializeApp(firebaseConfig);
+        const messaging = firebase.messaging();
+
+        // 4. Manejador de notificaciones en segundo plano
+        messaging.onBackgroundMessage((payload) => {
+            console.log('[sw.js] Mensaje recibido:', payload);
+            
+            const notificationTitle = payload.notification.title || "Nueva notificación";
+            const notificationOptions = {
+                body: payload.notification.body,
+                icon: '/favicon.ico', // Ajusta según tus assets en public
+                badge: '/favicon.ico'
+            };
+
+            self.registration.showNotification(notificationTitle, notificationOptions);
+        });
+
+    } catch (error) {
+        console.error('[sw.js] Error al parsear la configuración de Firebase:', error);
+    }
 } else {
-	console.error("SW: No se recibió la configuración de Firebase");
+    console.error('[sw.js] No se encontró la configuración en la URL de registro.');
 }
