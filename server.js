@@ -32,15 +32,15 @@ const sendNotification = async (user, title, body) => {
 				requireInteraction: true
 			}
 		},
-		android: {
-			priority: 'high',
-			notification: {
-				channel_id: 'alertas_urgentes', // ID del canal
-				sound: 'default',
-				default_vibrate_timings: true,
-				priority: 'high'
-			}
-		},
+		// android: {
+		// 	priority: 'high',
+		// 	notification: {
+		// 		channel_id: 'alertas_urgentes', // ID del canal
+		// 		sound: 'default',
+		// 		default_vibrate_timings: true,
+		// 		priority: 'high'
+		// 	}
+		// },
 		token: user.token
 	};
 
