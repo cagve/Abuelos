@@ -1,5 +1,4 @@
 // src/js/firebase-config.js
-
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/messaging';
 

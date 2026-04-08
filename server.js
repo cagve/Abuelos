@@ -32,22 +32,21 @@ const sendNotification = async (user, title, body) => {
 				requireInteraction: true
 			}
 		},
-		// android: {
-		// 	priority: 'high',
-		// 	notification: {
-		// 		channel_id: 'alertas_urgentes', // ID del canal
-		// 		sound: 'default',
-		// 		default_vibrate_timings: true,
-		// 		priority: 'high'
-		// 	}
-		// },
+		android: {
+			priority: 'high',
+			notification: {
+				channel_id: 'alertas_urgentes', // ID del canal
+				sound: 'default',
+				default_vibrate_timings: true,
+				priority: 'high'
+			}
+		},
 		token: user.token
 	};
 
 	try {
 		const response = await admin.messaging().send(message);
 		console.log('Notificación enviada con éxito:', response);
-		console.log(storedUser)
 	} catch (error) {
 		console.log('Error enviando notificación:', error);
 	}
@@ -55,7 +54,6 @@ const sendNotification = async (user, title, body) => {
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static('./'))
 
 let users = [];
 let storedUser = null
@@ -88,12 +86,6 @@ app.get('/test-push', async (req, res) => {
 app.get('/api/all-tokens', (req, res) => {
 	res.json(users);
 });
-
-
-app.get('/info', (req, res) => {
-	res.sendFile(path.join(__dirname, 'info.html'));
-});
-
 
 
 app.listen(port, () => {

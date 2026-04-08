@@ -1,16 +1,13 @@
 importScripts('https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js');
 importScripts('https://www.gstatic.com/firebasejs/10.7.1/firebase-messaging-compat.js');
 
-// 1. Extraemos el parámetro 'config' de la URL
 const urlParams = new URLSearchParams(location.search);
 const configString = urlParams.get('config');
 
 if (configString) {
     try {
-        // 2. Parseamos el JSON que enviaste desde el frontend
         const firebaseConfig = JSON.parse(decodeURIComponent(configString));
 
-        // 3. Inicializamos Firebase
         firebase.initializeApp(firebaseConfig);
         const messaging = firebase.messaging();
 
